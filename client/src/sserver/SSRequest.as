@@ -14,15 +14,14 @@ import sserver.api.ISServer;
 
 public class SSRequest extends EventDispatcher{
 
-    private var _onComplete : Function;
-    private var _onError    : Function;
-    private var _method     : String;
-    private var _args       : Array;
-    private var _server     : ISServer;
+    protected var _onComplete : Function;
+    protected var _onError    : Function;
+    protected var _server     : ISServer;
 
-    public function SSRequest(  method: String, args: Array, onComplete:Function = null, onError: Function = null ) {
-        _method     = method;
-        _args       = args;
+    private var _data       : String;
+
+    public function SSRequest(  data: String, onComplete:Function = null, onError: Function = null ) {
+        _data       = data;
         _onComplete = onComplete;
         _onError    = onError;
     }
@@ -31,13 +30,10 @@ public class SSRequest extends EventDispatcher{
 
         _server = server;
 
-        if( !_method )
-            throw new Error("Method name is can't be null!");
-
         var request : URLRequest = new URLRequest( _server.defaultURL );
-        request.method  = URLRequestMethod.POST;
-        request.data    = new URLVariables();
-        request.data.message = _server.crypt.encrypt( JSON.stringify({data: {method: _method, args: _args}}) );
+        request.method          = URLRequestMethod.POST;
+        request.data            = new URLVariables();
+        request.data.message    = _server.crypt.encrypt( _data );
 
         var loader : URLLoader = new URLLoader();
         loader.addEventListener( Event.COMPLETE, handlerCompleteRequest );

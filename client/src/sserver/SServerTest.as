@@ -20,14 +20,14 @@ public class SServerTest extends Sprite {
         _server.addEventListener( SServerEvent.READY, handlerReady );
         _server.start();
 
-        _server.send( new SSRequest("hello", ["Alex"], handlerHello, handlerHelloError ) );
-        _server.send( new SSRequest("hello", ["Max"], handlerHello, handlerHelloError ) );
-        _server.send( new SSRequest("hello", ["Jack"], handlerHello, handlerHelloError ) );
+        _server.send( new SSRequestCall("hello", ["Alex"], handlerHello, handlerHelloError ) );
+        _server.send( new SSRequestCall("hello", ["Max"], handlerHello, handlerHelloError ) );
+        _server.send( new SSRequestCall("hello", ["Jack"], handlerHello, handlerHelloError ) );
 
     }
 
     private function handlerReady( event:SServerEvent ):void {
-        _server.send( new SSRequest("hello", ["Ilya"], handlerHello, handlerHelloError ) )
+        _server.send( new SSRequestCall("hello", ["Ilya"], handlerHello, handlerHelloError ) );
     }
 
     private function handlerHelloError( data:Object ):void {
