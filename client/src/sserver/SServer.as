@@ -37,6 +37,10 @@ public class SServer extends EventDispatcher implements ISServer{
         dhExchange.startExchange( _defaultURL );
     }
 
+    public function setURL( url:String ):String {
+        return _defaultURL = url;
+    }
+
     public function send( req : SSRequest ):void{
         if( !req ) throw  new Error("Request can't be null!");
         _requestQueue.add( req );
