@@ -12,6 +12,7 @@ public interface ISServer extends IEventDispatcher{
     function start():void;
     function get isReady():Boolean;
     function get crypt():ICrypt
+    function setURL( url:String ):String;
     function get defaultURL():String
     function get requestQueue():IRequestQueue;
 }

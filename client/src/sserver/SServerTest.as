@@ -27,7 +27,7 @@ public class SServerTest extends Sprite {
     }
 
     private function handlerReady( event:SServerEvent ):void {
-        _server.send( new SSRequestCall("hello", ["Ilya"], handlerHello, handlerHelloError ) );
+        _server.send( new SSRequest("hello", handlerHello, handlerHelloError ) );
     }
 
     private function handlerHelloError( data:Object ):void {
